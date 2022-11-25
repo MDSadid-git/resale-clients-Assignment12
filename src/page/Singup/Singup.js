@@ -1,12 +1,19 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../UserContext/UserContext";
 
+const googleProvider = new GoogleAuthProvider();
+
 const Singup = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from2 = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -18,6 +25,8 @@ const Singup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        toast.success("Creat New Accoutn !!!");
+        navigate(from2, { replace: true });
         console.log(user);
         setLoginUserEmail(data.email);
       })
@@ -25,6 +34,15 @@ const Singup = () => {
         console.log(error.message);
         setSignUPError(error.message);
       });
+  };
+  const UserGoogle = () => {
+    signInWithGoogle(googleProvider)
+      .then((resul) => {
+        const user = resul.user;
+        toast.success("Creat New Accoutn !!!");
+        navigate(from2, { replace: true });
+      })
+      .catch((e) => console.error(e));
   };
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -97,7 +115,7 @@ const Singup = () => {
             </Link>
           </p>
           <div className="divider"></div>
-          <button className="btn btn-outline w-full">
+          <button onClick={UserGoogle} className="btn btn-outline w-full">
             CONTINUE WITH GOOGLE
           </button>
         </div>

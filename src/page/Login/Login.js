@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../UserContext/UserContext";
 import "./style.css";
 
@@ -8,6 +9,9 @@ const Login = () => {
   const { signIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from2 = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -18,6 +22,8 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        toast.success("Creat New Accoutn !!!");
+        navigate(from2, { replace: true });
         console.log(user);
         setLoginUserEmail(data.email);
       })
