@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -5,8 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../UserContext/UserContext";
 import "./style.css";
 
+const googleProvider = new GoogleAuthProvider();
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const location = useLocation();
@@ -31,6 +33,15 @@ const Login = () => {
         console.log(error.message);
         setLoginError(error.message);
       });
+  };
+  const UserGoogle = () => {
+    signInWithGoogle(googleProvider)
+      .then((resul) => {
+        const user = resul.user;
+        toast.success("Creat New Accoutn !!!");
+        navigate(from2, { replace: true });
+      })
+      .catch((e) => console.error(e));
   };
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -80,7 +91,7 @@ const Login = () => {
             </Link>
           </p>
           <div className="divider"></div>
-          <button className="btn btn-outline w-full">
+          <button onClick={UserGoogle} className="btn btn-outline w-full">
             CONTINUE WITH GOOGLE
           </button>
         </div>
