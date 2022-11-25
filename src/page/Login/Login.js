@@ -85,13 +85,16 @@ const Login = () => {
             </div>
           </form>
           <p className="mt-5">
-            New to Doctors Portal{" "}
+            New to Resale Phone{" "}
             <Link className="text-secondary" to={"/singup"}>
               Creat new Account
             </Link>
           </p>
           <div className="divider"></div>
-          <button onClick={UserGoogle} className="btn btn-outline w-full">
+          <button
+            onClick={UserGoogle}
+            className="btn btn-outline btn-info w-full"
+          >
             CONTINUE WITH GOOGLE
           </button>
         </div>

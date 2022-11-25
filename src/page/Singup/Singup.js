@@ -8,7 +8,7 @@ import { AuthContext } from "../../UserContext/UserContext";
 const googleProvider = new GoogleAuthProvider();
 
 const Singup = () => {
-  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const location = useLocation();
@@ -25,6 +25,14 @@ const Singup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateUser(userInfo)
+          .then(() => {})
+          .catch((err) => {
+            console.log(err);
+          });
         toast.success("Creat New Accoutn !!!");
         navigate(from2, { replace: true });
         console.log(user);
@@ -115,7 +123,10 @@ const Singup = () => {
             </Link>
           </p>
           <div className="divider"></div>
-          <button onClick={UserGoogle} className="btn btn-outline w-full">
+          <button
+            onClick={UserGoogle}
+            className="btn btn-outline btn-info w-full"
+          >
             CONTINUE WITH GOOGLE
           </button>
         </div>
