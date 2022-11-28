@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { Link } from "react-router-dom";
 import ProductsCart from "./ProductsCart";
 
 const Products = () => {
@@ -12,6 +11,7 @@ const Products = () => {
       return data;
     },
   });
+
   return (
     <div className="my-10 py-10 mx-auto">
       <hr />
@@ -30,13 +30,6 @@ const Products = () => {
         {products.map((pro) => (
           <ProductsCart key={pro._id} ser={pro}></ProductsCart>
         ))}
-      </div>
-      <div className="flex justify-center">
-        <Link to={`/servicespage`}>
-          <button className="btn mx-auto btn-outline btn-secondary">
-            See all Products
-          </button>
-        </Link>
       </div>
     </div>
   );
