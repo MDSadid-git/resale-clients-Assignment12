@@ -1,21 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import BookModal from "./BookModal/BookModal";
 import ProductsCart from "./ProductsCart";
 
 const Products = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/resalesPhone");
+      const res = await fetch(`http://localhost:5000/resalesPhone`);
       const data = await res.json();
       return data;
     },
   });
 
   const handleBook = (data) => {
-    // setMyModle(data);
-    console.log(data);
+    // console.log(data);
   };
 
   return (
@@ -41,7 +39,6 @@ const Products = () => {
           ></ProductsCart>
         ))}
       </div>
-      <BookModal></BookModal>
     </div>
   );
 };

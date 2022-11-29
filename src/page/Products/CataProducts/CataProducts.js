@@ -4,12 +4,11 @@ import BookModal from "../BookModal/BookModal";
 
 const CataProducts = () => {
   const datass = useLoaderData();
-  const [myModle, setMyModle] = useState("");
+  const [myModle, setMyModle] = useState(null);
   const handleBook = (data) => {
     setMyModle(data);
-    console.log(data);
   };
-  console.log(myModle);
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
