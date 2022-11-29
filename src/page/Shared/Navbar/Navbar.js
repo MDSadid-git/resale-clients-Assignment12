@@ -59,6 +59,7 @@ const Navbar = () => {
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
+            MU
           </label>
           <ul
             tabIndex={1}
@@ -93,6 +94,7 @@ const Navbar = () => {
             d="M4 6h16M4 12h8m-8 6h16"
           />
         </svg>
+        DB
       </label>
     </div>
   );
