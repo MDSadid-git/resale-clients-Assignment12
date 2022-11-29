@@ -4,21 +4,20 @@ import { AuthContext } from "../../../UserContext/UserContext";
 import Products from "../Products";
 
 const AllProducts = () => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const allData = useLoaderData();
-  console.log(allData);
-  const datadetails = {
-    email: user.email,
-    productName: allData.name,
-  };
+  // const datadetails = {
+  //   email: user?.email,
+  //   productName: allData.name,
+  // };
   return (
     <div>
       <Products></Products>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {allData.data.map((ses, i) => (
           <>
-            <div className="card w-4/5 glass mx-auto my-9" key={ses._id}>
+            <div className="card w-4/5 glass mx-auto my-9" key={i}>
               <figure>
                 <img src={ses.image} alt="car!" />
               </figure>
