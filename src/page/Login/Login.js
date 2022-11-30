@@ -74,9 +74,6 @@ const Login = () => {
                 className="input input-bordered w-full "
                 {...register("password")}
               />
-              <label className="label">
-                <span className="label-text">Forget Password</span>
-              </label>
             </div>
 
             <input

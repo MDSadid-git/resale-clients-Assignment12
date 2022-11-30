@@ -80,6 +80,12 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/bookings/${params.id}`),
       },
+      {
+        path: "/dashboard/allBooking",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookings/${params.id}`),
+      },
     ],
   },
 ]);

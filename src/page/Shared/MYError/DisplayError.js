@@ -16,7 +16,7 @@ const DisplayError = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center my-20">
       <div>
         <p className="text-red-500">Something went wrong!!!</p>
         <p className="text-red-400">{error.statusText || error.message}</p>
