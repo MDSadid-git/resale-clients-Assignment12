@@ -11,7 +11,6 @@ const googleProvider = new GoogleAuthProvider();
 const Singup = () => {
   const { createUser, signInWithGoogle, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
-  const [loginUserEmail, setLoginUserEmail] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const [createUserEmail, setCreateUserEmail] = useState("");
@@ -42,7 +41,6 @@ const Singup = () => {
         toast.success("Creat New Accoutn !!!");
         saveUser(data.email, data.name);
         navigate(from2, { replace: true });
-        setLoginUserEmail(data.email);
       })
       .catch((error) => {
         console.log(error.message);
