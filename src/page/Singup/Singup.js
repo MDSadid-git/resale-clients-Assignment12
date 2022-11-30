@@ -34,8 +34,8 @@ const Singup = () => {
             console.log(err);
           });
         toast.success("Creat New Accoutn !!!");
+        saveUser(data.email, data.name);
         navigate(from2, { replace: true });
-        console.log(user);
         setLoginUserEmail(data.email);
       })
       .catch((error) => {
@@ -48,9 +48,35 @@ const Singup = () => {
       .then((resul) => {
         const user = resul.user;
         toast.success("Creat New Accoutn !!!");
+        saveUser(user.email, user.displayName);
         navigate(from2, { replace: true });
       })
       .catch((e) => console.error(e));
+  };
+  const saveUser = (email, name) => {
+    const user = { email, name };
+    fetch(`http://localhost:5000/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        getUserToken(email);
+      });
+  };
+  const getUserToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate(from2, { replace: true });
+        }
+      });
   };
   return (
     <div className="h-[800px] flex justify-center items-center">
