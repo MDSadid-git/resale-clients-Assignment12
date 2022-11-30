@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 import { AuthContext } from "../../UserContext/UserContext";
 
 const googleProvider = new GoogleAuthProvider();
@@ -13,7 +14,12 @@ const Singup = () => {
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [createUserEmail, setCreateUserEmail] = useState("");
+  const [token] = useToken(createUserEmail);
   const from2 = location.state?.from?.pathname || "/";
+  if (token) {
+    navigate(from2, { replace: true });
+  }
   const {
     register,
     handleSubmit,
@@ -65,19 +71,10 @@ const Singup = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        getUserToken(email);
+        setCreateUserEmail(email);
       });
   };
-  const getUserToken = (email) => {
-    fetch(`http://localhost:5000/jwt?email=${email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.accessToken) {
-          localStorage.setItem("accessToken", data.accessToken);
-          navigate(from2, { replace: true });
-        }
-      });
-  };
+
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="bg-slate-100 rounded-xl boxColor">
