@@ -30,6 +30,7 @@ const Singup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        setCreateUserEmail(data.email);
         const userInfo = {
           displayName: data.name,
         };
@@ -40,7 +41,6 @@ const Singup = () => {
           });
         toast.success("Creat New Accoutn !!!");
         saveUser(data.email, data.name);
-        navigate(from2, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);

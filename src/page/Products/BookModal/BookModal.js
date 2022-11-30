@@ -4,7 +4,6 @@ import { AuthContext } from "../../../UserContext/UserContext";
 
 const BookModal = ({ myModle }) => {
   const { user } = useContext(AuthContext);
-  const datadetails = {};
   const handleBooking = (data) => {
     const booking = {
       productName: data.name,
