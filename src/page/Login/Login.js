@@ -1,5 +1,6 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
+import useTitle from "../../hooks/useTitle";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -16,6 +17,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from2 = location.state?.from?.pathname || "/";
+  useTitle("Loging");
   if (token) {
     navigate(from2, { replace: true });
   }
@@ -79,6 +81,7 @@ const Login = () => {
             <input
               className="btn btn-secondary w-full text-white mt-5"
               type="submit"
+              value={`LogIn`}
             />
             <div>
               {loginError && <p className="text-red-600">{loginError}</p>}

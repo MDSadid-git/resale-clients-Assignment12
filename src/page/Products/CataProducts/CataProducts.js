@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 import BookModal from "../BookModal/BookModal";
 
 const CataProducts = () => {
+  useTitle("Cata Products");
   const datass = useLoaderData();
   const [myModle, setMyModle] = useState(null);
   const handleBook = (data) => {

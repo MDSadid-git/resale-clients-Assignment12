@@ -1,19 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../../../../hooks/useTitle";
 import BookModal from "../../../Products/BookModal/BookModal";
+import Products from "../../../Products/Products";
 
 const ProductsAll = () => {
+  useTitle("All products");
   const { data: randomProducts = [] } = useQuery({
     queryKey: ["porducts"],
     queryFn: async () => {
       try {
-        const res = await fetch(`http://localhost:5000/porducts`, {
-          headers: {
-            "content-type": "application/json",
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
+        const res = await fetch(
+          `https://resale-server-eight.vercel.app/porducts`,
+          {
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
         const data = await res.json();
         return data;
       } catch (err) {
@@ -29,8 +35,11 @@ const ProductsAll = () => {
 
   return (
     <div>
+      <Products></Products>
       <div className="my-10">
-        <h2 className="text-4xl text-center">Random Products</h2>
+        <h2 className="text-4xl text-center  text-pink-600  font-extrabold">
+          Random Products
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
           {randomProducts.map((ses, i) => (
             <>

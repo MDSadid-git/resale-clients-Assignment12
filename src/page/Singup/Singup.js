@@ -3,12 +3,14 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 import useToken from "../../hooks/useToken";
 import { AuthContext } from "../../UserContext/UserContext";
 
 const googleProvider = new GoogleAuthProvider();
 
 const Singup = () => {
+  useTitle("SingUp");
   const { createUser, signInWithGoogle, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
   const location = useLocation();
@@ -59,7 +61,7 @@ const Singup = () => {
   };
   const saveUser = (email, name, specialty) => {
     const user = { email, name, specialty };
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://resale-server-eight.vercel.app/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -143,7 +145,7 @@ const Singup = () => {
             </div>
             <input
               className="btn btn-secondary w-full my-5"
-              value="Login"
+              value="Sing up"
               type="submit"
             />
             <div></div>

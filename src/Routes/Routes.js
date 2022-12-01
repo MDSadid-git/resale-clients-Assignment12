@@ -59,7 +59,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/resaleApple/${params.id}`),
+          fetch(
+            `https://resale-server-eight.vercel.app/resaleApple/${params.id}`
+          ),
       },
     ],
   },
@@ -88,13 +90,13 @@ const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`https://resale-server-eight.vercel.app/bookings/${params.id}`),
       },
       {
         path: "/dashboard/allBooking",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(`https://resale-server-eight.vercel.app/bookings/${params.id}`),
       },
     ],
   },

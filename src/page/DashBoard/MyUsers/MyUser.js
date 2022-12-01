@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import useTitle from "../../../hooks/useTitle";
 import ConfirmModal from "../../Shared/ConfirmModel/ConfirmModal";
 
 const MyUser = () => {
+  useTitle("My User");
   const [deletingUser, setDeletingUser] = useState(null);
   const closeModle = () => {
     setDeletingUser(null);
@@ -12,13 +14,13 @@ const MyUser = () => {
   const { data: userData = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`);
+      const res = await fetch(`https://resale-server-eight.vercel.app/users`);
       const data = res.json();
       return data;
     },
   });
   const handleAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://resale-server-eight.vercel.app/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -32,8 +34,23 @@ const MyUser = () => {
         }
       });
   };
+  const handleVerify = (id) => {
+    fetch(`https://resale-server-eight.vercel.app/users/verify/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("User Verify successfully");
+          refetch();
+        }
+      });
+  };
   const handleDeletuser = (user) => {
-    fetch(`http://localhost:5000/users/${user._id}`, {
+    fetch(`https://resale-server-eight.vercel.app/users/${user._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -50,7 +67,7 @@ const MyUser = () => {
   };
   return (
     <div>
-      <h2 className="text-4xl">All Users</h2>
+      <h2 className="text-4xl text-center my-5">All Users</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           <thead>
@@ -59,6 +76,7 @@ const MyUser = () => {
               <th>Name</th>
               <th>Email</th>
               <th>specialty</th>
+              <th>Veryfi</th>
               <th> Addmin</th>
               <th>Delete</th>
             </tr>
@@ -70,6 +88,18 @@ const MyUser = () => {
                 <th>{user?.name}</th>
                 <td>{user?.email}</td>
                 <td>{user?.specialty ? user.specialty : "Buyer"}</td>
+                <td>
+                  {user?.verify !== "verify" ? (
+                    <p
+                      onClick={() => handleVerify(user._id)}
+                      className="text-red-700 font-extrabold"
+                    >
+                      UnVerify
+                    </p>
+                  ) : (
+                    <p className="text-green-800 font-extrabold">Verify</p>
+                  )}
+                </td>
                 <td>
                   {user?.role !== "admin" && (
                     <button

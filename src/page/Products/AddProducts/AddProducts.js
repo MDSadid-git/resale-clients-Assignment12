@@ -2,8 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 
 const AddProducts = () => {
+  useTitle("Add products");
   const {
     register,
     handleSubmit,
@@ -35,7 +37,7 @@ const AddProducts = () => {
             sellerName: data.sellerName,
           };
           // save doctor information
-          fetch(`http://localhost:5000/porducts`, {
+          fetch(`https://resale-server-eight.vercel.app/porducts`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -47,7 +49,7 @@ const AddProducts = () => {
             .then((result) => {
               console.log(result);
               toast.success(`${data.name} is Added successfully`);
-              navigate("/products");
+              navigate("/allproducts");
             });
         }
       });
@@ -128,7 +130,7 @@ const AddProducts = () => {
               <div className="form-control w-full max-w-xs mr-3">
                 <label className="label">
                   {" "}
-                  <span className="label-text">DatePosted</span>
+                  <span className="label-text">Date</span>
                 </label>
                 <input
                   type="text"

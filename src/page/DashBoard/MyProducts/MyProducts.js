@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 import { AuthContext } from "../../../UserContext/UserContext";
 
 const MyProducts = () => {
+  useTitle("My products");
   const { user } = useContext(AuthContext);
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://resale-server-eight.vercel.app/bookings?email=${user?.email}`;
   const { data: bookings = [], isLoading } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
@@ -23,7 +25,7 @@ const MyProducts = () => {
   }
   return (
     <div>
-      <h2 className="text-4xl">My Products List</h2>
+      <h2 className="text-4xl text-center my-5">My Products List</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           <thead>

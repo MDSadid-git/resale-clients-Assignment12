@@ -3,8 +3,10 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLoaderData, useNavigation } from "react-router-dom";
 import CheckoutForm from "./CheckoutFrom";
+import useTitle from "../../../hooks/useTitle";
 
 const Payment = () => {
+  useTitle("Payment");
   const myData = useLoaderData();
   const { price, productName } = myData;
   const stripePromise = loadStripe(
