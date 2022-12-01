@@ -40,7 +40,7 @@ const Singup = () => {
             console.log(err);
           });
         toast.success("Creat New Accoutn !!!");
-        saveUser(data.email, data.name);
+        saveUser(data.email, data.name, data.specialty);
       })
       .catch((error) => {
         console.log(error.message);
@@ -57,8 +57,8 @@ const Singup = () => {
       })
       .catch((e) => console.error(e));
   };
-  const saveUser = (email, name) => {
-    const user = { email, name };
+  const saveUser = (email, name, specialty) => {
+    const user = { email, name, specialty };
     fetch(`http://localhost:5000/users`, {
       method: "POST",
       headers: {
@@ -128,8 +128,21 @@ const Singup = () => {
               />
               {errors.password && <p>{errors.password.message}</p>}
             </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                {" "}
+                <span className="label-text">Specialty</span>
+              </label>
+              <select
+                {...register("specialty")}
+                className="select input-bordered w-full max-w-xs"
+              >
+                <option>Seller</option>
+                <option>Buyer</option>
+              </select>
+            </div>
             <input
-              className="btn btn-accent w-full my-5"
+              className="btn btn-secondary w-full my-5"
               value="Login"
               type="submit"
             />

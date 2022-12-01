@@ -77,7 +77,7 @@ const Login = () => {
             </div>
 
             <input
-              className="btn btn-accent w-full text-white mt-5"
+              className="btn btn-secondary w-full text-white mt-5"
               type="submit"
             />
             <div>

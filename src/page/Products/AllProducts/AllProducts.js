@@ -1,16 +1,11 @@
-import React, { useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import { AuthContext } from "../../../UserContext/UserContext";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { useLoaderData } from "react-router-dom";
 import Products from "../Products";
 
 const AllProducts = () => {
-  // const { user } = useContext(AuthContext);
-
   const allData = useLoaderData();
-  // const datadetails = {
-  //   email: user?.email,
-  //   productName: allData.name,
-  // };
+
   return (
     <div>
       <Products></Products>

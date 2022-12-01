@@ -58,6 +58,7 @@ const MyUser = () => {
               <th></th>
               <th>Name</th>
               <th>Email</th>
+              <th>specialty</th>
               <th> Addmin</th>
               <th>Delete</th>
             </tr>
@@ -68,6 +69,7 @@ const MyUser = () => {
                 <th>{i + 1}</th>
                 <th>{user?.name}</th>
                 <td>{user?.email}</td>
+                <td>{user?.specialty ? user.specialty : "Buyer"}</td>
                 <td>
                   {user?.role !== "admin" && (
                     <button

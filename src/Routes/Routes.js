@@ -7,12 +7,14 @@ import MyUser from "../page/DashBoard/MyUsers/MyUser";
 import Payment from "../page/DashBoard/Payment/Payment";
 import Home from "../page/Home/Home/Home";
 import Login from "../page/Login/Login";
+import AddProducts from "../page/Products/AddProducts/AddProducts";
 import CataProducts from "../page/Products/CataProducts/CataProducts";
 import Products from "../page/Products/Products";
 import DisplayError from "../page/Shared/MYError/DisplayError";
 import Singup from "../page/Singup/Singup";
 import AdminRoute from "./AdminRouts/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ProductsAll from "../page/DashBoard/MyProducts/AllProducts/ProductsAll";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products></Products>,
+      },
+      {
+        path: "/allproducts",
+        element: <ProductsAll></ProductsAll>,
+      },
+      {
+        path: "/addproducts",
+        element: <AddProducts></AddProducts>,
       },
       {
         path: "/cataproducts/:id",

@@ -26,7 +26,6 @@ const ServicesCart = ({ ser: { image, productName, _id }, ser }) => {
           </div>
         </div>
       </div>
-      {/* <BookModal></BookModal> */}
     </div>
   );
 };
