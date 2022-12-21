@@ -41,7 +41,7 @@ const Singup = () => {
           .catch((err) => {
             console.log(err);
           });
-        toast.success("Creat New Accoutn !!!");
+        toast.success("Creat New Accoutn!!!");
         saveUser(data.email, data.name, data.specialty);
       })
       .catch((error) => {
