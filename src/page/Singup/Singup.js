@@ -53,7 +53,7 @@ const Singup = () => {
     signInWithGoogle(googleProvider)
       .then((resul) => {
         const user = resul.user;
-        toast.success("Creat New Accoutn !!!");
+        toast.success("Creat New Account with google!!!");
         saveUser(user.email, user.displayName);
         navigate(from2, { replace: true });
       })
