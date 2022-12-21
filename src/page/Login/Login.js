@@ -43,7 +43,7 @@ const Login = () => {
     signInWithGoogle(googleProvider)
       .then((resul) => {
         const user = resul.user;
-        toast.success("Login success!!!");
+        toast.success("Login success with Google!!!");
         setLoginUserEmail(user.email);
       })
       .catch((e) => console.error(e));
